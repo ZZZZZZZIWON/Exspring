@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 조회결과를 자바객체에 담을때, 밑줄표기법의 컬럼명과 낙타표기법으니 자바속성(변수)명을 자동 연결 -->
+		<!-- 밑줄 표기법을 자동으로 낙타표기법으로 변경해서 인식 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.exam.myapp.member.MemberVo" alias="MemberVo"/>
+	</typeAliases>
+	
+</configuration>
