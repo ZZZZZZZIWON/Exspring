@@ -1,4 +1,4 @@
-package com.exam.myapp.member;
+package com.exam.ex.myapp.member_x;
 
 import java.io.IOException;
 import java.io.PrintWriter;

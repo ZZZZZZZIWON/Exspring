@@ -1,4 +1,4 @@
-package com.exam.myapp.member;
+package com.exam.ex.myapp.member_x;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.exam.myapp.member.MemberDao;
+import com.exam.myapp.member.MemberVo;
 
 // MemberDaoBatis 안에서 mybatis를 이용해서 SQL문을 편하게 실행 가능
 // 더는 사용하지 X

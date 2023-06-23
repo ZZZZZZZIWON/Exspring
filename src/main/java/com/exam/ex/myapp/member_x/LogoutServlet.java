@@ -1,4 +1,4 @@
-package com.exam.myapp.member;
+package com.exam.ex.myapp.member_x;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/member/logout.do")
+//@WebServlet("/member/logout.do")
 public class LogoutServlet extends HttpServlet {
 	
 	@Override
