@@ -11,6 +11,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.exam.myapp.member.MemberVo" alias="MemberVo"/>
+		<typeAlias type="com.exam.myapp.bbs.BbsVo" alias="BbsVo"/>
 	</typeAliases>
 	
 </configuration>

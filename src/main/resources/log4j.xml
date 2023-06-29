@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+ 
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
@@ -11,8 +12,10 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<!-- 마이바티스가 실행하는 SQL문의 로그 출력을 위하여 DAO 클래스가 속한 패키지의 로그 레벨을 낮추기 -->
+	<!-- 로그레벨 : (낮음) TRACE - DEBUG - INFO - WARN - ERROR - FATAL (높음) -->
 	<logger name="com.exam.myapp">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

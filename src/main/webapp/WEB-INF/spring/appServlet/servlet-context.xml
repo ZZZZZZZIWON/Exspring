@@ -27,6 +27,17 @@
 	
 	<context:component-scan base-package="com.exam.myapp" />
 	
+	<!-- HandlerInterceptor 등록 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/**"/>
+			<exclude-mapping path="/member/login.do"/>
+			<exclude-mapping path="/member/add.do"/>
+			<beans:bean class="com.exam.myapp.comm.LoginInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
+	
 	<!-- 데이터베이스 입출력을 위한 객체들을 등록하는 부분 -->
 	
  	 <!-- 스프링의 트랜잭션 관리를 담당할 객체 등록 -->
