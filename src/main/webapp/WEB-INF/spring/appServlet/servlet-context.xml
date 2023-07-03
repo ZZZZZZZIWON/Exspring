@@ -5,11 +5,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -27,10 +29,14 @@
 	
 	<context:component-scan base-package="com.exam.myapp" />
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></beans:bean>
+	
+	
 	<!-- HandlerInterceptor 등록 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/**"/>
+			<mapping path="/bbs/**"/>
 			<exclude-mapping path="/member/login.do"/>
 			<exclude-mapping path="/member/add.do"/>
 			<beans:bean class="com.exam.myapp.comm.LoginInterceptor"></beans:bean>
@@ -39,6 +45,9 @@
 	
 	
 	<!-- 데이터베이스 입출력을 위한 객체들을 등록하는 부분 -->
+	
+	
+	<tx:annotation-driven/>
 	
  	 <!-- 스프링의 트랜잭션 관리를 담당할 객체 등록 -->
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

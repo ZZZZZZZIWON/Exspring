@@ -62,7 +62,7 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-		
+
 		<!-- Oracle Database jdbc 라이브러리 -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
@@ -160,6 +160,14 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

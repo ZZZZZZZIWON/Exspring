@@ -1,12 +1,17 @@
 package com.exam.myapp.bbs;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +40,7 @@ public class BbsController {
 
 	@PostMapping("add.do")
 	public String add(BbsVo vo, HttpSession session, @SessionAttribute("loginUser") MemberVo mvo) {
-		
+			
 		vo.setBbsWriter(mvo.getMemId());
 		
 		int n = bbsService.insertBbs(vo);
@@ -62,7 +67,21 @@ public class BbsController {
 	public String delete(int bbsNo) {
 		int n = bbsService.deleteBbs(bbsNo);
 		System.out.println(n + "명의 회원 삭제");
-		return "redirect: list.do";
+		return "redirect:/bbs/list.do";
 	}
+	
+	@GetMapping("down.do")
+	public void download(int attNo, HttpServletResponse resp) {
 
+		AttachVo vo = bbsService.selectAttach(attNo);
+
+		File f = bbsService.getAttachFile(vo);
+		
+		try {
+			FileCopyUtils.copy(new FileInputStream(f), resp.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 }

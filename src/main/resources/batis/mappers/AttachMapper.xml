@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exam.myapp.bbs.AttachDao"> 
+
+	 <select id="selectBbsList" resultType="BbsVo" >
+	 	SELECT BBS_NO, BBS_TITLE, BBS_WRITER, BBS_REG_DATE FROM BBS
+	 	ORDER BY BBS_NO
+	</select>
+	
+	<insert id="insertAttach" > 
+	
+	INSERT INTO ATTACH(ATT_NO, ATT_ORG_NAME, ATT_NEW_NAME, ATT_BBS_NO)
+	VALUES(att_seq.NEXTVAL, #{attOrgName}, #{attNewName}, #{attBbsNo})
+	
+	</insert>
+
+	<delete id="deleteBbs" >
+	
+		DELETE FROM BBS WHERE BBS_NO = #{bbsNo}
+	
+	</delete>
+	
+	<select id="selectAttach" resultType="AttachVo" >
+	
+		SELECT ATT_NO, ATT_ORG_NAME, ATT_NEW_NAME, ATT_BBS_NO FROM ATTACH
+		WHERE ATT_NO = #{attNo}		
+	
+	</select>
+	
+	<update id="updateBbs">
+	
+		UPDATE BBS 
+		SET BBS_TITLE = #{bbsTitle},
+			BBS_CONTENT = #{bbsContent}
+		WHERE BBS_NO = #{bbsNo}		
+		
+	</update>
+	
+	
+</mapper>

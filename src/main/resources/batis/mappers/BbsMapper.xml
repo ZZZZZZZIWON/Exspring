@@ -4,7 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.myapp.bbs.BbsDao"> 
+	
+	<resultMap type="BbsVo" id="BbsMap">
+		<id property="bbsNo" column="bbs_no" />
+		<result property="bbsTitle" column="bbs_title" />
+		<result property="bbsContent" column="bbs_content" />
+		<result property="bbsWriter" column="bbs_writer" />
+		<result property="bbsRegDate" column="bbs_reg_date" />
+		<result property="bbsCount" column="bbs_count" />
 
+		<collection property="attachList" ofType="AttachVo">
+			<id property="attNo" column="att_no" />
+			<result property="attOrgName" column="att_org_name" />
+			<result property="attNewName" column="att_new_name" />
+			<result property="attBbsNo" column="att_bbs_no" />
+		</collection>
+
+	</resultMap>
 
 	 <select id="selectBbsList" resultType="BbsVo" >
 	 	SELECT BBS_NO, BBS_TITLE, BBS_WRITER, BBS_REG_DATE FROM BBS
@@ -12,22 +28,28 @@
 	</select>
 	
 	<insert id="insertBbs" > 
+		<selectKey keyProperty="bbsNo" resultType="int" order="BEFORE">
+			select bbs_seq.NEXTVAL FROM DUAL
+		</selectKey>
 	
-	INSERT INTO BBS( BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER ) 
-	VALUES(bbs_seq.NEXTVAL, #{bbsTitle}, #{bbsContent}, #{bbsWriter})
+		INSERT INTO BBS( BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER ) 
+		VALUES(#{bbsNo}, #{bbsTitle}, #{bbsContent}, #{bbsWriter})
 	
 	</insert>
 
 	<delete id="deleteBbs" >
 	
-		DELETE FROM BBS WHERE BBS_NO = #{bbsNo}
+		DELETE FROM BBS 
+		WHERE BBS_NO = #{bbsNo}
 	
 	</delete>
 	
-	<select id="selectBbs" resultType="BbsVo" >
+	<select id="selectBbs" resultMap="BbsMap" >
 	
-		SELECT BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER, BBS_REG_DATE, BBS_COUNT FROM BBS
-		WHERE bbs_no = #{value}		
+		SELECT BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER, BBS_REG_DATE, BBS_COUNT, 
+     			 ATT_NO, ATT_ORG_NAME, ATT_NEW_NAME, ATT_BBS_NO
+		FROM BBS B LEFT OUTER JOIN ATTACH A ON (B.BBS_NO = A.ATT_BBS_NO)
+		WHERE BBS_NO = #{value}		
 	
 	</select>
 	
